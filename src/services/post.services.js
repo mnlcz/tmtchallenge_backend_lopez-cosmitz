@@ -1,16 +1,23 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
-const {where} = require("sequelize");
-const getAll = async () => {
+const POSTS_PER_PAGE = 3;
+
+const getAll = async (page) => {
+    const skip = (page - 1) * POSTS_PER_PAGE;
     return await Post.findAll({
-        order: [["creationdate", "DESC"]]
+        order: [["creationdate", "DESC"]],
+        limit: POSTS_PER_PAGE,
+        offset: skip
     });
 }
 
-const getByUser = async (username) => {
+const getByUser = async (username, page) => {
+    const skip = (page - 1) * POSTS_PER_PAGE;
     return await Post.findAll({
         where: {username: username},
-        order: [["creationdate", "DESC"]]
+        order: [["creationdate", "DESC"]],
+        limit: POSTS_PER_PAGE,
+        offset: skip
     });
 }
 
@@ -32,7 +39,7 @@ const patchPost = async (id, content) => {
     if (dbPost === null) {
         throw new Error("Invalid post");
     }
-    const post = await Post.update(
+    await Post.update(
         {
             content: content
         },

@@ -1,8 +1,13 @@
 const postService = require("../services/post.services");
 
+
 const getAll = async (req, res) => {
     try {
-        const posts = await postService.getAll();
+        let {page} = req.query;
+        if (!page) {
+            page = 1;
+        }
+        const posts = await postService.getAll(parseInt(page));
         res.status(200);
         res.json(posts);
     } catch (err) {
@@ -13,7 +18,11 @@ const getAll = async (req, res) => {
 
 const getByUser = async (req, res) => {
     try {
-        const posts = await postService.getByUser(req.params.user);
+        let {page} = req.query;
+        if (!page) {
+            page = 1;
+        }
+        const posts = await postService.getByUser(req.params.user, page);
         res.status(200);
         res.json(posts);
     } catch (err) {
