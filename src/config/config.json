@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "tmt",
+    "password": null,
+    "database": "tmtchallenge",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "tmt",
+    "password": null,
+    "database": "tmtchallenge",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "tmt",
+    "password": null,
+    "database": "tmtchallenge",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
